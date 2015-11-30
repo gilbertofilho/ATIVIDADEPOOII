@@ -55,7 +55,7 @@ public class CadastrarUsuario extends JFrame{
         painel.setBounds(10, 50, 330, 75);
         painel.setBackground(Color.red);
         painel2 = new JPanel(new FlowLayout());
-        painel2.setBounds(10, 130, 330, 70);
+        painel2.setBounds(10, 130, 330, 90);
         painel2.setBackground(Color.DARK_GRAY);
         
         painel.add(nome);
@@ -75,7 +75,7 @@ public class CadastrarUsuario extends JFrame{
         grupo.add(masculino);
         grupo.add(feminino);
         
-        setMinimumSize(new Dimension(350, 250));
+        setMinimumSize(new Dimension(350, 270));
         setVisible(true);
     }
     public static void main(String[] args) {
