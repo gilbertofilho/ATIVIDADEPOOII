@@ -37,6 +37,7 @@ public class Login extends Frame{
                 add(p);
                 setMinimumSize(new Dimension(500,500));
                 setVisible(true);
+                
         }
     
     
