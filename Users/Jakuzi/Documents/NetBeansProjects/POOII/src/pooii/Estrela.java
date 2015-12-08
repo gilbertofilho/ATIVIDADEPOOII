@@ -6,6 +6,8 @@ import java.awt.Color;
 import java.awt.Frame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 public class Estrela {
     Frame f = new Frame();
@@ -18,6 +20,31 @@ public class Estrela {
         f.setVisible(true);
         
         f.add(new MyCanvas());
+        
+        f.addWindowListener(new WindowListener(){
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+            @Override
+            public void windowClosing(WindowEvent e) {
+            System.exit(0);
+            }
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
     }
     
     public static void main(String[] args) {
@@ -40,6 +67,8 @@ public class Estrela {
          g2.drawLine(300, 300, 150, 0);
          g2.drawLine(300, 100, 0, 300);
       }
+      
+      
    }
     
 }

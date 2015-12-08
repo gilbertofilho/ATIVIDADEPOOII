@@ -6,6 +6,14 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.List;
+import java.awt.TextArea;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.util.Arrays;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,13 +24,17 @@ import javax.swing.JTextField;
 
 public class CadastrarUsuario extends JFrame{
 
-    public JLabel nome, sexo, comentario;
-    public JTextField tnome, tcomentario;
+    public JLabel nome, sexo, comentario, disciplinas;
+    public JTextField tnome;
+    public TextArea tcomentario;
     public JRadioButton masculino, feminino;
+    public RadioButtonHandler handler;
     public ButtonGroup grupo;
     public List lista;
     public JButton botao;
     public JPanel painel, painel2;
+    Aluno aluno = new Aluno();
+    String sexoSelect;
     
     public CadastrarUsuario(){
     
@@ -33,13 +45,15 @@ public class CadastrarUsuario extends JFrame{
         
         nome = new JLabel("Nome");
         sexo = new JLabel("Sexo");
-        comentario = new JLabel("Comentário");
+        disciplinas = new JLabel ("<html><font color =\"white\">Disciplinas");
+        comentario = new JLabel("<html><font color=\"white\">Comentário");
         
-        tnome = new JTextField(10);
-        tcomentario = new JTextField(10);
+        tnome = new JTextField(30);
+        tcomentario = new TextArea();
         
         masculino = new JRadioButton("M", false);
         feminino = new JRadioButton("F", false);
+        handler = new RadioButtonHandler();
         
         lista = new List(5, true);
         
@@ -52,10 +66,10 @@ public class CadastrarUsuario extends JFrame{
         botao = new JButton("Cadastrar");
         
         painel = new JPanel(new FlowLayout());
-        painel.setBounds(10, 50, 330, 75);
-        painel.setBackground(Color.red);
-        painel2 = new JPanel(new FlowLayout());
-        painel2.setBounds(10, 130, 330, 90);
+        painel.setBounds(10, 50, 680, 40);
+        painel.setBackground(Color.ORANGE);
+        painel2 = new JPanel(new GridLayout(3,2));
+        painel2.setBounds(10, 100, 680, 90);
         painel2.setBackground(Color.DARK_GRAY);
         
         painel.add(nome);
@@ -63,6 +77,7 @@ public class CadastrarUsuario extends JFrame{
         painel.add(sexo);
         painel.add(masculino);
         painel.add(feminino);
+        painel2.add(disciplinas);
         painel2.add(lista);
         painel2.add(comentario);
         painel2.add(tcomentario);
@@ -75,8 +90,68 @@ public class CadastrarUsuario extends JFrame{
         grupo.add(masculino);
         grupo.add(feminino);
         
-        setMinimumSize(new Dimension(350, 270));
+        masculino.addItemListener(handler);
+        feminino.addItemListener(handler);
+        
+        setMinimumSize(new Dimension(700, 500));
         setVisible(true);
+        
+        botao.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            Cadastrar();
+            JanelaConfirmacao();
+        }
+        });
+        this.addWindowListener(new WindowListener(){
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+            @Override
+            public void windowClosing(WindowEvent e) {
+            System.exit(0);
+            }
+            @Override
+            public void windowClosed(WindowEvent e) {
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
+        
+    }
+    
+    public void Cadastrar(){
+    this.aluno.setNome(tnome.getText());
+    this.aluno.setSexo(sexoSelect);
+    this.aluno.setDisciplinas(lista.getSelectedItems());
+    this.aluno.setComentario(tcomentario.getText());
+    }
+    
+    public void JanelaConfirmacao(){
+    JanelaConfirmacao c = new JanelaConfirmacao(aluno);
+    }
+    
+    private class RadioButtonHandler implements ItemListener{
+
+        @Override
+        public void itemStateChanged(ItemEvent e) {
+            if(masculino.isSelected()){
+            sexoSelect = "masculino";
+            }
+            if(feminino.isSelected()){
+            sexoSelect = "feminino";
+            }
+        }
+    
     }
     public static void main(String[] args) {
         new CadastrarUsuario();
