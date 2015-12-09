@@ -35,6 +35,7 @@ public class Estrela {
             @Override
             public void windowIconified(WindowEvent e) {
             }
+            
             @Override
             public void windowDeiconified(WindowEvent e) {
             }
