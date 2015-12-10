@@ -18,6 +18,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
@@ -31,8 +32,8 @@ public class CadastrarUsuario extends JFrame{
     public RadioButtonHandler handler;
     public ButtonGroup grupo;
     public List lista;
-    public JButton botao;
-    public JPanel painel, painel2;
+    public JButton botao, botao2;
+    public JPanel painel, painel2, mini1, mini2;
     Aluno aluno = new Aluno();
     String sexoSelect;
     
@@ -45,8 +46,8 @@ public class CadastrarUsuario extends JFrame{
         
         nome = new JLabel("Nome");
         sexo = new JLabel("Sexo");
-        disciplinas = new JLabel ("<html><font color =\"white\">Disciplinas");
-        comentario = new JLabel("<html><font color=\"white\">Comentário");
+        disciplinas = new JLabel ("<html><font color =\"gray\">Disciplinas");
+        comentario = new JLabel("<html><font color=\"gray\">Comentário");
         
         tnome = new JTextField(30);
         tcomentario = new TextArea();
@@ -64,24 +65,33 @@ public class CadastrarUsuario extends JFrame{
         lista.add("ciências");
         
         botao = new JButton("Cadastrar");
+        botao2 = new JButton("Voltar");
         
         painel = new JPanel(new FlowLayout());
         painel.setBounds(10, 50, 680, 40);
         painel.setBackground(Color.ORANGE);
         painel2 = new JPanel(new GridLayout(3,2));
         painel2.setBounds(10, 100, 680, 90);
-        painel2.setBackground(Color.DARK_GRAY);
+        mini1 = new JPanel(new BorderLayout());
+        mini1.setBounds(0, 0, 100, 40);
+        mini1.setBackground(Color.lightGray);
+        mini2 = new JPanel(new BorderLayout());
+        mini2.setBounds(0, 0, 100, 40);
+        mini2.setBackground(Color.LIGHT_GRAY);
         
         painel.add(nome);
         painel.add(tnome);
         painel.add(sexo);
         painel.add(masculino);
         painel.add(feminino);
-        painel2.add(disciplinas);
+        mini1.add(disciplinas, BorderLayout.EAST);
+        painel2.add(mini1);
         painel2.add(lista);
-        painel2.add(comentario);
+        mini2.add(comentario, BorderLayout.EAST);
+        painel2.add(mini2);
         painel2.add(tcomentario);
         painel2.add(botao);
+        painel2.add(botao2);
         
         add(painel);
         add(painel2);
@@ -99,7 +109,12 @@ public class CadastrarUsuario extends JFrame{
         botao.addActionListener(new ActionListener(){
         public void actionPerformed(ActionEvent e){
             Cadastrar();
-            JanelaConfirmacao();
+        }
+        });
+        botao2.addActionListener(new ActionListener(){
+        public void actionPerformed(ActionEvent e){
+            Login l = new Login();
+            setVisible(false);
         }
         });
         this.addWindowListener(new WindowListener(){
@@ -130,14 +145,15 @@ public class CadastrarUsuario extends JFrame{
     }
     
     public void Cadastrar(){
+        if(tnome.getText() != null && sexoSelect != null && lista.getSelectedItems() != null && tcomentario.getText() != null){
     this.aluno.setNome(tnome.getText());
     this.aluno.setSexo(sexoSelect);
     this.aluno.setDisciplinas(lista.getSelectedItems());
     this.aluno.setComentario(tcomentario.getText());
-    }
-    
-    public void JanelaConfirmacao(){
     JanelaConfirmacao c = new JanelaConfirmacao(aluno);
+    } else{
+        JOptionPane.showMessageDialog(null, "Preencha todos os campos!");
+        }
     }
     
     private class RadioButtonHandler implements ItemListener{

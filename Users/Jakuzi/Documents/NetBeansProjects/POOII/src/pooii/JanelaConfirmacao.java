@@ -30,7 +30,7 @@ public class JanelaConfirmacao extends JFrame{
     
     this.a = aluno;
     
-    frase = new JLabel("deseja realmente cadastrar estas informações?");
+    frase = new JLabel("Deseja realmente cadastrar estas informações?");
     confirmar = new JButton("Confirmar");
     cancelar = new JButton("Cancelar");
     
@@ -56,30 +56,6 @@ public class JanelaConfirmacao extends JFrame{
     voltar();
     }
     });
-    /*this.addWindowListener(new WindowListener(){
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-            @Override
-            public void windowClosing(WindowEvent e) {
-            System.exit(0);
-            }
-            @Override
-            public void windowClosed(WindowEvent e) {
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
-        });*/
     }
     
     public void mostrarUsuario(){

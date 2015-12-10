@@ -22,17 +22,18 @@ public class Login extends Frame{
 
     Label email = new Label("Email"), senha = new Label("Senha");
     TextField te = new TextField(40);
-    JPasswordField ts = new JPasswordField(30);
+    JPasswordField ts = new JPasswordField(23);
     Button botao = new Button("Login");
     Panel p = new Panel(new FlowLayout());
     
     Login(){
-		setLayout(null); // posicionamento absoluto
+                setTitle("Tela Login");	
+                setLayout(null); // posicionamento absoluto
 		setResizable(true);
 		//configureLabel(false);
 		setBackground(Color.red);
                 setLocation(100,100);
-                p.setBounds(10,30, 400, 180);
+                p.setBounds(10,30, 400, 100);
                 
                 p.add(email);
                 p.add(te);
@@ -41,7 +42,7 @@ public class Login extends Frame{
 		p.add(botao);
                 
                 add(p);
-                setMinimumSize(new Dimension(500,200));
+                setMinimumSize(new Dimension(500,120));
                 setVisible(true);
                 
                 botao.addActionListener(new ActionListener(){
@@ -80,7 +81,7 @@ public class Login extends Frame{
     
     public void analisar(){
     
-        String usuarioSistema = "g";
+        String usuarioSistema = "gilberto123@hotmail.com";
         String senhaSistema = "123";
         String s = new String(ts.getPassword());
         
